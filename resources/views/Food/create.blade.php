@@ -6,10 +6,10 @@
             </a>
         </x-slot>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form action="/food" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <!-- Name -->
+            <!-- title -->
             <div>
                 <x-input-label for="title" :value="__('Title')" />
 
@@ -18,7 +18,7 @@
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 
-            <!-- Email Address -->
+            <!-- LOGO -->
             <div class="mt-4">
                 <x-input-label for="logo" value="Logo" />
 
@@ -27,7 +27,7 @@
                 <x-input-error :messages="$errors->get('logo')" class="mt-2" />
             </div>
 
-            <!-- Password -->
+            <!-- ingredients -->
             <div class="mt-4">
                 <x-input-label for="ingredients" :value="__('ingredients')" />
 
@@ -40,7 +40,7 @@
                 <x-input-error :messages="$errors->get('ingredients')" class="mt-2" />
             </div>
 
-            <!-- Confirm Password -->
+            <!-- recipe -->
             <div class="mt-4">
                 <x-input-label for="recipe" :value="__('recipe')" />
 

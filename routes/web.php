@@ -30,11 +30,17 @@ Route::get('/cocktails', [CocktailsController::class,'index'])->name('drink');
 //show create form for cocktail
 Route::get('/cocktail/create', [CocktailsController::class,'create']);
 
-//index all cocktails
+//store cocktail data
+Route::post('/cocktail', [CocktailsController::class,'store']);
+
+//index all foods
 Route::get('/foods', [FoodsController::class,'index'])->name('food');
 
 //show create form for Food
 Route::get('/food/create', [FoodsController::class,'create']);
+
+//store cocktail data
+Route::post('/food', [FoodsController::class,'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

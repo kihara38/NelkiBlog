@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Cocktails;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CocktailsController extends Controller
 {
     //show all cocktails
     public function index(){
         return view('Cocktail.index',[
-            'cocktails'=>Cocktails::all()
-            // latest()->filter(request(['search']))->paginate(10)
+            'cocktails'=>Cocktails::latest()->filter(request(['search']))
+            ->paginate(1)
         ]);
     }
 
@@ -27,5 +28,22 @@ class CocktailsController extends Controller
         return view('Cocktail.create');
     }
 
+    //store Cocktail data
+    public function store(Request $request)
+    {
+        $formFields=$request->validate([
+            'title'=>['required',Rule::unique('cocktails','title')],
+            'procedure'=>'required',
+            'ingredients'=>'required'
+       ]);
+
+       if($request->hasFile('logo')){
+        $formFields['logo']=$request->file('logo')->store('logos','public');
+       }
+
+       Cocktails::create($formFields);
+
+       return redirect('/cocktails')->with('message','Cocktail created successfully!');
+    }
 
 }

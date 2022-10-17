@@ -1,6 +1,6 @@
 <x-app>
     <div>
-      {{-- @include('partials._search') --}}
+      @include('components._search')
       <div class="flex flex-wrap justify-between shadow-md px-5">
         @unless (count($cocktails) == 0)
         @foreach ($cocktails as $cocktail)
@@ -16,8 +16,8 @@
 
 
       </div>
-      {{-- <div class=" p-1">
+      <div class=" p-1">
         {{ $cocktails->links() }}
-      </div> --}}
+      </div>
     </div>
   </x-app>

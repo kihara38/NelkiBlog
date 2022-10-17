@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cocktails', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            // $table->string('logo')->nullable();
+            $table->string('logo')->nullable();
             $table->longText('ingredients');
             $table->longText('procedure');
             $table->timestamps();

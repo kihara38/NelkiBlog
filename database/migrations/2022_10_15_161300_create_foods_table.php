@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            // $table->string('logo')->nullable();
+            $table->string('logo')->nullable();
             $table->longText('ingredients');
             $table->longText('recipe');
             $table->timestamps();

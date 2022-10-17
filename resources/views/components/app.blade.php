@@ -34,6 +34,7 @@
                 {{$slot}}
             </main>
             @include('layouts.footer')
+            <x-flash-message/>
         </div>
     </body>
 </html>

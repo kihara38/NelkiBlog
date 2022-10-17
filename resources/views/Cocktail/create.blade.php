@@ -6,10 +6,10 @@
                 </a>
             </x-slot>
 
-            <form method="POST" action="{{ route('register') }}">
+            <form action="/cocktail" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <!-- Name -->
+                <!--title -->
                 <div>
                     <x-input-label for="title" :value="__('Title')" />
 
@@ -18,7 +18,7 @@
                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                 </div>
 
-                <!-- Email Address -->
+                <!-- Logo -->
                 <div class="mt-4">
                     <x-input-label for="logo" value="Logo" />
 
@@ -27,7 +27,7 @@
                     <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                 </div>
 
-                <!-- Password -->
+                <!-- ingredient -->
                 <div class="mt-4">
                     <x-input-label for="ingredients" :value="__('ingredients')" />
 
@@ -40,7 +40,7 @@
                     <x-input-error :messages="$errors->get('ingredients')" class="mt-2" />
                 </div>
 
-                <!-- Confirm Password -->
+                <!-- procedure -->
                 <div class="mt-4">
                     <x-input-label for="procedure" :value="__('procedure')" />
 
@@ -56,13 +56,14 @@
                 </div>
 
                 <div class="flex items-center justify-center mt-4">
-                    <a href="/cocktails" class="underline text-sm text-gray-600 hover:text-gray-900" >
-                    Back
-                    </a>
+
 
                     <x-primary-button class="ml-4 bg-teal-500">
                         {{ __('Create Cocktail') }}
                     </x-primary-button>
+                    <a href="/cocktails" class="underline text-sm text-gray-600 hover:text-gray-900" >
+                        Back
+                        </a>
                 </div>
             </form>
         </x-auth-card>
