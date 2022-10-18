@@ -41,9 +41,38 @@ class CocktailsController extends Controller
         $formFields['logo']=$request->file('logo')->store('logos','public');
        }
 
+       $formFields['user_id']=auth()->id();
+
        Cocktails::create($formFields);
 
        return redirect('/cocktails')->with('message','Cocktail created successfully!');
     }
 
+    //show Edit form
+    public function edit(Cocktails $cocktail){
+
+        return view ('/cocktail.edit',['cocktail'=>$cocktail]);
+    }
+    //update cocktail data
+    public function update(Request $request, Cocktails $cocktail){
+        $formField=$request->validate([
+            'title'=>['required'],
+            'procedure'=>'required',
+            'ingredients'=>'required'
+       ]);
+       if($request->hasFile('logo')){
+        $formField['logo']=$request->file('logo')->store('logos','public');
+       }
+       $cocktail->update($formField);
+
+       return back()->with('message','Cocktail Updated successfully!');
+    }
+
+    //Delete Cocktail
+    public function destroy(Cocktails $cocktail){
+        $cocktail->delete();
+        return redirect('/cocktails')->with('message','Cocktail Delete Successfully');
+    }
 }
+
+

@@ -28,19 +28,46 @@ Route::get('/blog', function () {
 Route::get('/cocktails', [CocktailsController::class,'index'])->name('drink');
 
 //show create form for cocktail
-Route::get('/cocktail/create', [CocktailsController::class,'create']);
+Route::get('/cocktail/create', [CocktailsController::class,'create'])->middleware('auth');
 
 //store cocktail data
-Route::post('/cocktail', [CocktailsController::class,'store']);
+Route::post('/cocktail', [CocktailsController::class,'store'])->middleware('auth');
+
+//show cocktail edit
+Route::get('/cocktail/{cocktail}/edit',[CocktailsController::class,'edit'])->middleware('auth');
+
+//Edit submit to Update
+Route::put('/cocktail/{cocktail}',[CocktailsController::class,'update'])->middleware('auth');
+
+//Delete submit to Update
+Route::delete('/cocktail/{cocktail}',[CocktailsController::class,'destroy'])->middleware('auth');
+
+//show single cocktail
+Route::get('/cocktail/{cocktail}',[CocktailsController::class,'show']);
+
+
 
 //index all foods
 Route::get('/foods', [FoodsController::class,'index'])->name('food');
 
 //show create form for Food
-Route::get('/food/create', [FoodsController::class,'create']);
+Route::get('/food/create', [FoodsController::class,'create'])->middleware('auth');
 
-//store cocktail data
-Route::post('/food', [FoodsController::class,'store']);
+//store food data
+Route::post('/food', [FoodsController::class,'store'])->middleware('auth');
+
+//show food edit
+Route::get('/food/{food}/edit',[FoodsController::class,'edit'])->middleware('auth');
+
+//Edit submit to Update
+Route::put('/food/{food}',[FoodsController::class,'update'])->middleware('auth');
+
+//Delete submit to Update
+Route::delete('/food/{food}',[FoodsController::class,'destroy'])->middleware('auth');
+
+
+//show single food
+Route::get('/food/{food}',[FoodsController::class,'show']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,11 +76,7 @@ Route::get('/dashboard', function () {
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])
 ->name('google-auth');
 
-//show single cocktail
-Route::get('/cocktail/{cocktail}',[CocktailsController::class,'show']);
 
-//show single food
-Route::get('/food/{food}',[FoodsController::class,'show']);
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'CallbackGoogle']);
 

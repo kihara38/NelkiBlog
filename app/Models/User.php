@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //relationship with cocktalis
+    public function cocktails()
+    {
+        return $this->hasMany(Cocktails::class, 'user_id');
+    }
+
+    //relationship with cocktalis
+    public function foodss()
+    {
+        return $this->hasMany(Foods::class, 'user_id');
+    }
 }

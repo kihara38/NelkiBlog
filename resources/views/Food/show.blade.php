@@ -19,10 +19,10 @@
       <i class="mx-32 flex justify-end text-black">{{ $food->created_at }}</i>
     </div>
     <div class="mt-1 p-2 flex space-x-6">
-      <a href="/cocktail/{{ $food->id }}/edit ">
+      <a href="/food/{{ $food->id }}/edit ">
       <i class="fa-solid fa-pencil"></i>Edit</a>
 
-      <form action="/cocktail/{{ $food->id }}" method="post">
+      <form action="/food/{{ $food->id }}" method="post">
       @csrf
       @method('DELETE')
       <button class="text-red-500"><i class="fa-solid fa-trash">Delete</i></button>
