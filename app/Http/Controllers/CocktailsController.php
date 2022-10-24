@@ -8,11 +8,12 @@ use Illuminate\Validation\Rule;
 
 class CocktailsController extends Controller
 {
+
     //show all cocktails
     public function index(){
         return view('Cocktail.index',[
             'cocktails'=>Cocktails::latest()->filter(request(['search']))
-            ->paginate(1)
+            ->paginate(10)
         ]);
     }
 
@@ -50,11 +51,15 @@ class CocktailsController extends Controller
 
     //show Edit form
     public function edit(Cocktails $cocktail){
-
+        $this->authorize('update', $cocktail);
         return view ('/cocktail.edit',['cocktail'=>$cocktail]);
     }
     //update cocktail data
     public function update(Request $request, Cocktails $cocktail){
+        $this->authorize('update', $cocktail);
+        // if ($cocktail->user_id != auth()->id()){
+        //     abort(403, 'unathorized Action');
+        // }
         $formField=$request->validate([
             'title'=>['required'],
             'procedure'=>'required',
@@ -70,6 +75,9 @@ class CocktailsController extends Controller
 
     //Delete Cocktail
     public function destroy(Cocktails $cocktail){
+        if ($cocktail->user_id != auth()->id()){
+            abort(403, 'unathorized Action');
+        }
         $cocktail->delete();
         return redirect('/cocktails')->with('message','Cocktail Delete Successfully');
     }

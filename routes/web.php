@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CocktailsController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\GoogleAuthController;
@@ -20,9 +21,7 @@ use Symfony\Component\HttpKernel\Exception\GoneHttpException;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/blog', function () {
-    return view('blog.index');
-});
+
 
 //index all cocktails
 Route::get('/cocktails', [CocktailsController::class,'index'])->name('drink');
@@ -65,9 +64,16 @@ Route::put('/food/{food}',[FoodsController::class,'update'])->middleware('auth')
 //Delete submit to Update
 Route::delete('/food/{food}',[FoodsController::class,'destroy'])->middleware('auth');
 
-
 //show single food
 Route::get('/food/{food}',[FoodsController::class,'show']);
+
+//show all blogs
+Route::get('/blog',[BlogsController::class,'index'])/*->middleware('auth','isAdmin')*/;
+//show create form for blog
+Route::get('/blog/create', [BlogsController::class,'create'])->middleware('auth');
+
+//store blog data
+Route::post('/blog', [BlogsController::class,'store'])->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

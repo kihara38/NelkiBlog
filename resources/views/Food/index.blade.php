@@ -1,6 +1,13 @@
 <x-app>
     <div>
-      @include('components._search')
+        <div class="flex justify-between px-3 ">
+            @include('components._search')
+            @auth
+            <a class="text-xl bg-gray-300 w-10 h-10 rounded-full flex justify-center items-center m-2 text-center " href="/food/create"> <i class="fa-solid fa-plus"></i></a>
+            @endauth
+
+
+        </div>
       <div class="flex flex-wrap justify-between shadow-md px-5">
         @unless (count($foods) == 0)
         @foreach ($foods as $food)

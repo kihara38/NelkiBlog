@@ -54,6 +54,9 @@ class FoodsController extends Controller
     }
      //update cocktail data
      public function update(Request $request, Foods $food){
+        if ($food->user_id != auth()->id()){
+            abort(403, 'unathorized Action');
+        }
         $formField=$request->validate([
             'title'=>['required'],
             'recipe'=>'required',
@@ -64,11 +67,14 @@ class FoodsController extends Controller
        }
        $food->update($formField);
 
-       return back()->with('message','Cocktail Updated successfully!');
+       return back()->with('message','Food Updated successfully!');
     }
 
     //Delete Foods
     public function destroy(Foods $food){
+        if ($food->user_id != auth()->id()){
+            abort(403, 'unathorized Action');
+        }
         $food->delete();
         return redirect('/foods')->with('message','Foods Delete Successfully');
     }

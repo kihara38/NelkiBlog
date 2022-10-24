@@ -48,9 +48,14 @@ class User extends Authenticatable
         return $this->hasMany(Cocktails::class, 'user_id');
     }
 
-    //relationship with cocktalis
-    public function foodss()
+    //relationship with foods
+    public function foods()
     {
         return $this->hasMany(Foods::class, 'user_id');
+    }
+    //relationship with foods
+    public function blogs()
+    {
+        return $this->hasMany(Blogs::class, 'user_id');
     }
 }
