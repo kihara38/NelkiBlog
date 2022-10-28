@@ -49,14 +49,13 @@ class FoodsController extends Controller
 
     //show Edit form
     public function edit(Foods $food){
+        $this->authorize('update', $food);
 
         return view ('/food.edit',['food'=>$food]);
     }
      //update cocktail data
      public function update(Request $request, Foods $food){
-        if ($food->user_id != auth()->id()){
-            abort(403, 'unathorized Action');
-        }
+        $this->authorize('update', $food);
         $formField=$request->validate([
             'title'=>['required'],
             'recipe'=>'required',
@@ -72,9 +71,7 @@ class FoodsController extends Controller
 
     //Delete Foods
     public function destroy(Foods $food){
-        if ($food->user_id != auth()->id()){
-            abort(403, 'unathorized Action');
-        }
+        $this->authorize('update', $food);
         $food->delete();
         return redirect('/foods')->with('message','Foods Delete Successfully');
     }

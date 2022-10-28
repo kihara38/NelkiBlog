@@ -22,7 +22,7 @@ class GoogleAuthController extends Controller
             if($userExist){
                 Auth::login($userExist);
 
-                return redirect()->intended('dashboard');
+                return redirect()->intended('/');
             }
             else{
                  $new_user=User::create([
@@ -32,10 +32,10 @@ class GoogleAuthController extends Controller
                 ]);
                 Auth::login($new_user);
 
-                return redirect()->intended('dashboard');
+                return redirect()->intended('/');
             }
         } catch (\Throwable $th) {
-            dd('someting went wrong!'.$th->getMessage());
+            return redirect('/')->with('message','sorry but an Error occured');
         }
     }
 }

@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         // return redirect()->intended(RouteServiceProvider::HOME);
         if(Auth::user()->role_as=='1'){
-            return redirect('admin/dashboard')->with('message','welcome To Dashboard');
+            return redirect('/dashboard')->with('message','welcome To Dashboard');
         }else{
             return redirect('/')->with('message','login Success');
         }

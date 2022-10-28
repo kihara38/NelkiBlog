@@ -9,7 +9,7 @@
           type="text"
           name="search"
           class="rounded-2xl border-none ring-2  pl-10"
-          placeholder="Search cocktail"
+          placeholder="Search...."
       />
       <div class="absolute bg-black text-white ml-44  h-8 w-16 rounded-2xl">
           <button

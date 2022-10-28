@@ -7,26 +7,26 @@
             <a class="text-xl bg-gray-300 w-10 h-10 rounded-full flex justify-center items-center m-2 text-center " href="/food/create"> <i class="fa-solid fa-plus"></i></a>
             @endauth
         </div>
-        <div class="p-1">
-            <div class="flex justify-center px-8">
-                @unless (count($blogs) == 0)
-                @foreach ($blogs as $blog)
-                <div class="flex justify-center ">
-                    <img class="rounded-xl bg-white w-72  h-36 border-solid mr-16 border-4 border-sky-500"
-                        src="{{ $blog->logo ? asset('storage/' . $blog->logo) : asset('image/coc8.jpg') }}" alt="">
-                </div>
-                <div class="w-1/2 h-40 flex flex-col justify-between">
-                    <h1>{{ $blog->title }}</h1>
-                    <p class="text-sm">{{ $blog->blog }}</p>
-                    <div class="p-2 flex justify-between">
-                        <i> published on 23/12/2002</i>
-                        <i> Author : : kihara Nelson</i>
+
+            @unless (count($blogs) == 0)
+            @foreach ($blogs as $blog)
+            <div class="p-1">
+                <div class="flex justify-center px-8 even:flex  p-1">
+                    <div class="flex justify-center even:mx-16 odd:mr-16">
+                        <img class="rounded-xl bg-white w-72  h-36 border-solid  border-4 border-sky-500"
+                            src="{{ $blog->logo ? asset('storage/' . $blog->logo) : asset('image/coc8.jpg') }}" alt="">
+                    </div>
+                    <div class="w-1/2 h-40 flex flex-col justify-between">
+                        <a href="/blog/{{ $blog->id }}"><h1 class="text-teal-300">{{ $blog->title }}</h1></a>
+                        <p class="text-sm">{{ $blog->blog }}</p>
+                        <div class="p-2 flex justify-between">
+                            <i> published on {{ $blog->created_at }}</i>
+                            <i> Author : : kihara Nelson</i>
+                        </div>
                     </div>
                 </div>
-
+                <hr class="mx-8 border-black">
             </div>
-            <hr class="mx-8 border-black">
-        </div>
         @endforeach
         @else
           <p>No Foods found</p>
@@ -34,9 +34,9 @@
 
 
       </div>
-      {{-- <div class=" p-1">
-        {{ $blog->links() }}
-      </div> --}}
+      <div class=" p-1">
+        {{ $blogs->links() }}
+      </div>
     </div>
   </x-app>
 {{-- <x-app>

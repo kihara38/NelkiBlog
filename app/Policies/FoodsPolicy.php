@@ -53,7 +53,7 @@ class FoodsPolicy
      */
     public function update(User $user, Foods $foods)
     {
-        //
+        return $user->id==$foods->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class FoodsPolicy
      */
     public function delete(User $user, Foods $foods)
     {
-        //
+        return $user->id==$foods->user_id;
     }
 
     /**

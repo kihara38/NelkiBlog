@@ -12,7 +12,7 @@ class BlogsController extends Controller
     //show all blog
     public function index(){
     return view('Blog.index',[
-        'blogs'=>Blogs::latest()->filter(request(['search']))->paginate(1)
+        'blogs'=>Blogs::latest()->filter(request(['search']))->paginate()
     ]);
 
     }
@@ -49,14 +49,12 @@ class BlogsController extends Controller
 
     //show Edit form
     public function edit(Blogs $blog){
-
+        $this->authorize('update', $blog);
         return view ('/blog.edit',['blog'=>$blog]);
     }
      //update cocktail data
      public function update(Request $request, Blogs $blog){
-        if ($blog->user_id != auth()->id()){
-            abort(403, 'unathorized Action');
-        }
+        $this->authorize('update', $blog);
         $formField=$request->validate([
             'title'=>['required'],
             'blog'=>'required'
@@ -66,14 +64,12 @@ class BlogsController extends Controller
        }
        $blog->update($formField);
 
-       return back()->with('message','blog Updated successfully!');
+       return redirect('/blog')->with('message','blog Updated successfully!');
     }
 
     //Delete blog
     public function destroy(Blogs $blog){
-        if ($blog->user_id != auth()->id()){
-            abort(403, 'unathorized Action');
-        }
+        $this->authorize('update', $blog);
         $blog->delete();
         return redirect('/blog')->with('message','blog Delete Successfully');
     }

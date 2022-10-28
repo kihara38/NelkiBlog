@@ -18,21 +18,28 @@
       <p class="mx-32">{{ $food->recipe }}</p>
       <i class="mx-32 flex justify-end text-black">{{ $food->created_at }}</i>
     </div>
-    @can('edit',$food->user_id)
+
 
 
     <div class="mt-1 p-2 flex space-x-6">
-      <a href="/food/{{ $food->id }}/edit ">
-      <i class="fa-solid fa-pencil"></i>Edit</a>
+        @can('update', $food)
 
-      <form action="/food/{{ $food->id }}" method="post">
-      @csrf
-      @method('DELETE')
-      <button class="text-red-500"><i class="fa-solid fa-trash">Delete</i></button>
-      </form>
-      @endcan
 
-    </div>
+        <a href="/food/{{ $food->id }}/edit ">
+        <i class="fa-solid fa-pencil"></i>Edit</a>
+
+        <form action="/food/{{ $food->id }}" method="post">
+        @csrf
+        @method('DELETE')
+        <button class="text-red-500"><i class="fa-solid fa-trash">Delete</i></button>
+        </form>
+
+        @endcan
+      </div>
+
+
+
+
     </div>
 
   </x-app>

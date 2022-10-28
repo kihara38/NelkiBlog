@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CocktailsController;
 use App\Http\Controllers\FoodsController;
@@ -75,9 +76,39 @@ Route::get('/blog/create', [BlogsController::class,'create'])->middleware('auth'
 //store blog data
 Route::post('/blog', [BlogsController::class,'store'])->middleware('auth');
 
+
+//show food edit
+Route::get('/blog/{blog}/edit',[BlogsController::class,'edit'])->middleware('auth');
+
+//Edit submit to Update
+Route::put('/blog/{blog}',[BlogsController::class,'update'])->middleware('auth');
+
+//Delete submit to Update
+Route::delete('/blog/{blog}',[BlogsController::class,'destroy'])->middleware('auth');
+
+//show single food
+Route::get('/blog/{blog}',[BlogsController::class,'show']);
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('Dashboard.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+//index all users
+Route::get('/auth/users', [AdminDashboardController::class,'users'])->middleware('auth','isAdmin');
+//index all cocktails
+Route::get('/admin/cocktails', [AdminDashboardController::class,'index'])->middleware('auth','isAdmin');
+//index all foods
+Route::get('/admin/foods', [AdminDashboardController::class,'food'])->middleware('auth','isAdmin');
+//index all blogs
+Route::get('/admin/blogs', [AdminDashboardController::class,'blog'])->middleware('auth','isAdmin');
+
+//Delete submit to Update
+Route::delete('/auth/user/{user}',[AdminDashboardController::class,'destroy'])->middleware('auth','isAdmin');
+//Delete submit to Update
+Route::delete('/auth/blog/{blog}',[AdminDashboardController::class,'deleteBlog'])->middleware('auth','isAdmin');
+//Delete submit to Update
+Route::delete('/auth/cocktail/{cocktail}',[AdminDashboardController::class,'deleteCocktail'])->middleware('auth','isAdmin');
+//Delete submit to Update
+Route::delete('/auth/food/{food}',[AdminDashboardController::class,'deleteFood'])->middleware('auth','isAdmin');
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])
 ->name('google-auth');
