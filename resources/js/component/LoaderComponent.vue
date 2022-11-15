@@ -19,7 +19,7 @@
 export default{
     data(){
         return{
-            loader_status:false
+            loader_status:true
         }
     },
     mounted(){
