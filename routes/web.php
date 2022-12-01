@@ -22,99 +22,102 @@ use Symfony\Component\HttpKernel\Exception\GoneHttpException;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/about', function () {
+    return view('about');
+});
 
 
 //index all cocktails
-Route::get('/cocktails', [CocktailsController::class,'index'])->name('drink');
+Route::get('/cocktails', [CocktailsController::class, 'index'])->name('drink');
 
 //show create form for cocktail
-Route::get('/cocktail/create', [CocktailsController::class,'create'])->middleware('auth');
+Route::get('/cocktail/create', [CocktailsController::class, 'create'])->middleware('auth');
 
 //store cocktail data
-Route::post('/cocktail', [CocktailsController::class,'store'])->middleware('auth');
+Route::post('/cocktail', [CocktailsController::class, 'store'])->middleware('auth');
 
 //show cocktail edit
-Route::get('/cocktail/{cocktail}/edit',[CocktailsController::class,'edit'])->middleware('auth');
+Route::get('/cocktail/{cocktail}/edit', [CocktailsController::class, 'edit'])->middleware('auth');
 
 //Edit submit to Update
-Route::put('/cocktail/{cocktail}',[CocktailsController::class,'update'])->middleware('auth');
+Route::put('/cocktail/{cocktail}', [CocktailsController::class, 'update'])->middleware('auth');
 
 //Delete submit to Update
-Route::delete('/cocktail/{cocktail}',[CocktailsController::class,'destroy'])->middleware('auth');
+Route::delete('/cocktail/{cocktail}', [CocktailsController::class, 'destroy'])->middleware('auth');
 
 //show single cocktail
-Route::get('/cocktail/{cocktail}',[CocktailsController::class,'show']);
+Route::get('/cocktail/{cocktail}', [CocktailsController::class, 'show']);
 
 
 
 //index all foods
-Route::get('/foods', [FoodsController::class,'index'])->name('food');
+Route::get('/foods', [FoodsController::class, 'index'])->name('food');
 
 //show create form for Food
-Route::get('/food/create', [FoodsController::class,'create'])->middleware('auth');
+Route::get('/food/create', [FoodsController::class, 'create'])->middleware('auth');
 
 //store food data
-Route::post('/food', [FoodsController::class,'store'])->middleware('auth');
+Route::post('/food', [FoodsController::class, 'store'])->middleware('auth');
 
 //show food edit
-Route::get('/food/{food}/edit',[FoodsController::class,'edit'])->middleware('auth');
+Route::get('/food/{food}/edit', [FoodsController::class, 'edit'])->middleware('auth');
 
 //Edit submit to Update
-Route::put('/food/{food}',[FoodsController::class,'update'])->middleware('auth');
+Route::put('/food/{food}', [FoodsController::class, 'update'])->middleware('auth');
 
 //Delete submit to Update
-Route::delete('/food/{food}',[FoodsController::class,'destroy'])->middleware('auth');
+Route::delete('/food/{food}', [FoodsController::class, 'destroy'])->middleware('auth');
 
 //show single food
-Route::get('/food/{food}',[FoodsController::class,'show']);
+Route::get('/food/{food}', [FoodsController::class, 'show']);
 
 //show all blogs
-Route::get('/blog',[BlogsController::class,'index'])/*->middleware('auth','isAdmin')*/;
+Route::get('/blog', [BlogsController::class, 'index'])/*->middleware('auth','isAdmin')*/;
 //show create form for blog
-Route::get('/blog/create', [BlogsController::class,'create'])->middleware('auth');
+Route::get('/blog/create', [BlogsController::class, 'create'])->middleware('auth');
 
 //store blog data
-Route::post('/blog', [BlogsController::class,'store'])->middleware('auth');
+Route::post('/blog', [BlogsController::class, 'store'])->middleware('auth');
 
 
 //show food edit
-Route::get('/blog/{blog}/edit',[BlogsController::class,'edit'])->middleware('auth');
+Route::get('/blog/{blog}/edit', [BlogsController::class, 'edit'])->middleware('auth');
 
 //Edit submit to Update
-Route::put('/blog/{blog}',[BlogsController::class,'update'])->middleware('auth');
+Route::put('/blog/{blog}', [BlogsController::class, 'update'])->middleware('auth');
 
 //Delete submit to Update
-Route::delete('/blog/{blog}',[BlogsController::class,'destroy'])->middleware('auth');
+Route::delete('/blog/{blog}', [BlogsController::class, 'destroy'])->middleware('auth');
 
 //show single food
-Route::get('/blog/{blog}',[BlogsController::class,'show']);
+Route::get('/blog/{blog}', [BlogsController::class, 'show']);
 
 Route::get('/dashboard', function () {
     return view('Dashboard.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 //index all users
-Route::get('/auth/users', [AdminDashboardController::class,'users'])->middleware('auth','isAdmin');
+Route::get('/auth/users', [AdminDashboardController::class, 'users'])->middleware('auth', 'isAdmin');
 //index all cocktails
-Route::get('/admin/cocktails', [AdminDashboardController::class,'index'])->middleware('auth','isAdmin');
+Route::get('/admin/cocktails', [AdminDashboardController::class, 'index'])->middleware('auth', 'isAdmin');
 //index all foods
-Route::get('/admin/foods', [AdminDashboardController::class,'food'])->middleware('auth','isAdmin');
+Route::get('/admin/foods', [AdminDashboardController::class, 'food'])->middleware('auth', 'isAdmin');
 //index all blogs
-Route::get('/admin/blogs', [AdminDashboardController::class,'blog'])->middleware('auth','isAdmin');
+Route::get('/admin/blogs', [AdminDashboardController::class, 'blog'])->middleware('auth', 'isAdmin');
 
 //Delete submit to Update
-Route::delete('/auth/user/{user}',[AdminDashboardController::class,'destroy'])->middleware('auth','isAdmin');
+Route::delete('/auth/user/{user}', [AdminDashboardController::class, 'destroy'])->middleware('auth', 'isAdmin');
 //Delete submit to Update
-Route::delete('/auth/blog/{blog}',[AdminDashboardController::class,'deleteBlog'])->middleware('auth','isAdmin');
+Route::delete('/auth/blog/{blog}', [AdminDashboardController::class, 'deleteBlog'])->middleware('auth', 'isAdmin');
 //Delete submit to Update
-Route::delete('/auth/cocktail/{cocktail}',[AdminDashboardController::class,'deleteCocktail'])->middleware('auth','isAdmin');
+Route::delete('/auth/cocktail/{cocktail}', [AdminDashboardController::class, 'deleteCocktail'])->middleware('auth', 'isAdmin');
 //Delete submit to Update
-Route::delete('/auth/food/{food}',[AdminDashboardController::class,'deleteFood'])->middleware('auth','isAdmin');
+Route::delete('/auth/food/{food}', [AdminDashboardController::class, 'deleteFood'])->middleware('auth', 'isAdmin');
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])
-->name('google-auth');
+    ->name('google-auth');
 
 
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'CallbackGoogle']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

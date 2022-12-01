@@ -7,27 +7,31 @@
             @include('components._search')
             @auth
                 <a class="text-xl bg-gray-300 w-10 h-10 rounded-full flex justify-center items-center m-2 text-center "
-                    href="/food/create"> <i class="fa-solid fa-plus"></i></a>
+                    href="/blog/create"> <i class="fa-solid fa-plus"></i></a>
             @endauth
         </div>
 
         @unless(count($blogs) == 0)
             @foreach ($blogs as $blog)
                 <div class="p-1">
-                    <div class="flex justify-center px-8 even:flex  p-1">
-                        <div class="flex justify-center even:mx-16 odd:mr-16">
+                    <div class="flex-col md:flex md:flex-row md:justify-center items-center px-3 even:flex  p-1">
+                        <div class="flex justify-center even:mx-16 odd:mr-0">
                             <img class="rounded-xl bg-white w-72  h-36 border-solid  border-4 border-sky-500"
                                 src="{{ $blog->logo ? asset('storage/' . $blog->logo) : asset('image/coc8.jpg') }}"
                                 alt="">
                         </div>
-                        <div class="w-1/2 h-40 flex flex-col justify-between">
+                        <div class="md:w-1/2 h-40 flex flex-col justify-between items-center">
                             <a href="/blog/{{ $blog->id }}">
                                 <h1 class="text-teal-300">{{ $blog->title }}</h1>
                             </a>
                             <p class="text-sm">{{ $blog->blog }}</p>
-                            <div class="p-2 flex justify-between">
-                                <i> published on {{ $blog->created_at }}</i>
-                                <i> Author : : kihara Nelson</i>
+                            <div class="p-1 md:p-3 flex justify-between">
+                                <i class="text-xs md:text-lg pr-4"> published on {{ $blog->created_at }}</i>
+                                <div class="flex text-xs md:text-lg">
+                                    <p class="px-2"><i class="fa-solid fa-thumbs-up"></i>20 </p>
+                                    <p class="px-2"><i class="fa-solid fa-thumbs-down"></i>10 </p>
+                                </div>
+                                <i class="text-xs md:text-lg pl-4"> Author : : kihara Nelson</i>
                             </div>
                         </div>
                     </div>
@@ -35,7 +39,7 @@
                 </div>
             @endforeach
         @else
-            <p>No Foods found</p>
+            <p>No Blogs found</p>
         @endunless
 
 
@@ -45,75 +49,3 @@
     </div>
     </div>
 </x-app>
-{{-- <x-app>
-    <div>
-
-
-
-        <div class="p-1">
-            <div class="flex flex-row-reverse justify-center px-8">
-                <div class="flex justify-center ">
-                    <img class="rounded-xl bg-white w-72  h-36 border-solid ml-16 border-4 border-sky-500"
-                        src="{{ asset('image/coc8.jpg') }}" alt="">
-                </div>
-                <div class="w-1/2 h-40 flex flex-col justify-between">
-                    <p class="text-sm">On the other hand, we denounce with righteous indignation and dislike men who are
-                        so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that
-                        they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to
-                        those who fail in their duty through weakness of will, which is the same as saying through
-                        shrinking from toil and pain. s</p>
-                    <div class="p-2 flex justify-between">
-                        <i> published on 23/12/2002</i>
-                        <i> Author : : kihara Nelson</i>
-                    </div>
-                </div>
-
-            </div>
-            <hr class="mx-8 border-black">
-        </div>
-
-        <div class="p-1">
-            <div class="flex justify-center px-8">
-                <div class="flex justify-center ">
-                    <img class="rounded-xl bg-white w-72  h-36 border-solid mr-16 border-4 border-sky-500"
-                        src="{{ asset('image/coc8.jpg') }}" alt="">
-                </div>
-                <div class="w-1/2 h-40 flex flex-col justify-between">
-                    <p class="text-sm">On the other hand, we denounce with righteous indignation and dislike men who are
-                        so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that
-                        they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to
-                        those who fail in their duty through weakness of will, which is the same as saying through
-                        shrinking from toil and pain. s</p>
-                    <div class="p-2 flex justify-between">
-                        <i> published on 23/12/2002</i>
-                        <i> Author : : kihara Nelson</i>
-                    </div>
-                </div>
-
-            </div>
-            <hr class="mx-8 border-black">
-        </div>
-
-        <div class="p-1">
-            <div class="flex flex-row-reverse justify-center px-8">
-                <div class="flex justify-center ">
-                    <img class="rounded-xl bg-white w-72  h-36 border-solid ml-16 border-4 border-sky-500"
-                        src="{{ asset('image/coc8.jpg') }}" alt="">
-                </div>
-                <div class="w-1/2 h-40 flex flex-col justify-between">
-                    <p class="text-sm">On the other hand, we denounce with righteous indignation and dislike men who are
-                        so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that
-                        they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to
-                        those who fail in their duty through weakness of will, which is the same as saying through
-                        shrinking from toil and pain. s</p>
-                    <div class="p-2 flex justify-between">
-                        <i> published on 23/12/2002</i>
-                        <i> Author : : kihara Nelson</i>
-                    </div>
-                </div>
-
-            </div>
-            <hr class="mx-8 border-black">
-        </div>
-    </div>
-</x-app> --}}

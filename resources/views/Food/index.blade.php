@@ -9,11 +9,12 @@
 
 
         </div>
-        <div class="flex flex-wrap justify-between shadow-md px-5">
+        <div class="flex flex-wrap justify-between shadow-md md:px-5">
             @unless(count($foods) == 0)
                 @foreach ($foods as $food)
-                    <div class="flex flex-col rounded-2xl bg-gray-400  items-center mx-4 mt-2 w-48 h-52  ">
-                        <img class="rounded-2xl w-48   h-44"
+                    <div
+                        class="flex flex-col flex-wrap rounded-2xl bg-gray-400  items-center mx-4 mt-2 md:w-48 w-40 md:h-52 h-44  ">
+                        <img class="rounded-2xl md:w-48 w-44   md:h-44 h-36"
                             src="{{ $food->logo ? asset('storage/' . $food->logo) : asset('image/dragon.png') }}"alt="">
                         <a href="/food/{{ $food->id }}">
                             <p>{{ $food->title }}</p>

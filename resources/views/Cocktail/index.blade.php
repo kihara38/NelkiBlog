@@ -8,11 +8,12 @@
                     href="/cocktail/create"> <i class="fa-solid fa-plus"></i></a>
             @endauth
         </div>
-        <div class="grid grid-cols-5 gap-0.5  gap-y-0.5  shadow-md px-5">
+        <div class="flex flex-wrap justify-between shadow-md md:px-5">
             @unless(count($cocktails) == 0)
                 @foreach ($cocktails as $cocktail)
-                    <div class="grid  rounded-2xl bg-gray-400  items-center mx-4 mt-2 w-64 h-52  even:h-72 even:w-64">
-                        <img class="rounded-2xl w-64   h-44 even:h-80 even:w-64"
+                    <div
+                        class="flex flex-col flex-wrap rounded-2xl bg-gray-400  items-center mx-4 mt-2 md:w-48 w-40 md:h-52 h-44  ">
+                        <img class="rounded-2xl md:w-48 w-44   md:h-44 h-36"
                             src="{{ $cocktail->logo ? asset('storage/' . $cocktail->logo) : asset('image/dragon.png') }}"alt="">
                         <a href="/cocktail/{{ $cocktail->id }}">
                             <p class="text-center">{{ $cocktail->title }}</p>
