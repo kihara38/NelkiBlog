@@ -25,7 +25,7 @@
                     class="lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:text-blue-400">
                     <span><i class="fa-solid fa-house pr-2"></i>Home</span>
                 </a>
-                <a href="#"
+                <a href="{{ __('about') }}"
                     class="lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:text-blue-400">
                     <span><i class="fa-solid fa-user pr-2"></i>About</span>
                 </a>
